@@ -10,14 +10,14 @@ class TelemetryApiController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $validator = Validator::make($request->json()->all(), [
+        $validator = Validator::make($request->all(), [
             'mac' => 'required|mac_address',
             'key' => 'required',
             'value' => 'required',
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['status' => 'ERROR!', 'error' => $validator->errors()->all()[0]]);
+            return response()->json(['status' => 'ERROR!', 'error' => $validator->errors()->all()[0]], 400);
         }
 
         $device = Device::createOrFirst([

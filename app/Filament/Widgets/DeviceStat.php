@@ -9,6 +9,8 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 class DeviceStat extends BaseWidget
 {
 
+    protected static ?string $pollingInterval = '2s';
+
     protected function getStats(): array
     {
         return Device::all()
